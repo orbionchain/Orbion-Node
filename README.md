@@ -10,9 +10,20 @@ This guide assumes you are starting with little to no experience in running a bl
 
 -----
 
-## 🛠️ What You'll Need (Prerequisites)
+## 🛠️ System and Software Requirements
 
-Before we begin, make sure you have these tools.
+Before we begin, ensure your system meets the following requirements.
+
+### Hardware Specifications (Recommended)
+
+To run a stable validator node, we recommend the following hardware specifications:
+
+  * **CPU:** Modern processor with 4 or more cores.
+  * **RAM:** 8 GB or more.
+  * **Storage:** A Solid State Drive (SSD) with at least 100 GB of free space is highly recommended for better performance.
+  * **Network:** A stable, high-speed internet connection (at least 10 Mbps).
+
+### Software Prerequisites
 
 1.  **A Command-Line Interface (CLI):**
       * **Windows:** **PowerShell** or **CMD**.
