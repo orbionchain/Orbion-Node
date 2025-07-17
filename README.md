@@ -110,23 +110,76 @@ To avoid typing your password every time, you'll save it in a file.
 
 #### 5b. Run the Node with Unlocked Account
 
-Now, run the final command. We've added two new flags: `--unlock` to specify which account to use for validating, and `--password` to point to your new password file.
+Now, run the final command. This is the complete command with all necessary flags to run a successful validator node.
+
+> **Note:** We add `--allow-insecure-unlock` because it's required when you unlock an account while also allowing remote access via HTTP. This is safe for our testnet environment.
 
 **You must replace `<YOUR_WALLET_ADDRESS>` with the address you created in Step 2.**
 
   * **Final Command (Windows - PowerShell):**
 
     ```powershell
-    .\Node\geth.exe --datadir ./data --networkid 109901 --bootnodes "enode://8dc9f4362a8fe37ce936674f3424fadb628b5a5a538f53e5e6c901cd5af2fd538b80c68b259fba221f13ad2b84c5300624aeace1cb40bc88273a00c0c54726a5@bootnode.orbionchain.com:30305" --syncmode "full" --http --http.addr "0.0.0.0" --http.port "8545" --http.corsdomain "*" --mine --miner.etherbase <YOUR_WALLET_ADDRESS> --unlock <YOUR_WALLET_ADDRESS> --password "password.txt"
+    .\Node\geth.exe --datadir ./data --networkid 109901 --bootnodes "enode://8dc9f4362a8fe37ce936674f3424fadb628b5a5a538f53e5e6c901cd5af2fd538b80c68b259fba221f13ad2b84c5300624aeace1cb40bc88273a00c0c54726a5@bootnode.orbionchain.com:30305" --syncmode "full" --http --http.addr "0.0.0.0" --http.port "8545" --http.corsdomain "*" --mine --miner.etherbase <YOUR_WALLET_ADDRESS> --unlock <YOUR_WALLET_ADDRESS> --password "password.txt" --allow-insecure-unlock
     ```
 
   * **Final Command (Linux / macOS - Bash):**
 
     ```bash
-    ./Node/geth --datadir ./data --networkid 109901 --bootnodes "enode://8dc9f4362a8fe37ce936674f3424fadb628b5a5a538f53e5e6c901cd5af2fd538b80c68b259fba221f13ad2b84c5300624aeace1cb40bc88273a00c0c54726a5@bootnode.orbionchain.com:30305" --syncmode "full" --http --http.addr "0.0.0.0" --http.port "8545" --http.corsdomain "*" --mine --miner.etherbase <YOUR_WALLET_ADDRESS> --unlock <YOUR_WALLET_ADDRESS> --password "password.txt"
+    ./Node/geth --datadir ./data --networkid 109901 --bootnodes "enode://8dc9f4362a8fe37ce936674f3424fadb628b5a5a538f53e5e6c901cd5af2fd538b80c68b259fba221f13ad2b84c5300624aeace1cb40bc88273a00c0c54726a5@bootnode.orbionchain.com:30305" --syncmode "full" --http --http.addr "0.0.0.0" --http.port "8545" --http.corsdomain "*" --mine --miner.etherbase <YOUR_WALLET_ADDRESS> --unlock <YOUR_WALLET_ADDRESS> --password "password.txt" --allow-insecure-unlock
     ```
 
 Now, your node will start, automatically unlock your account, and begin sealing new blocks successfully.
+
+-----
+
+## 🚀 Running Your Node 24/7 (Advanced)
+
+To be a reliable validator, your node must run continuously. If you close the terminal window, the node will stop. Here’s how to run it as a background process that keeps running even after you close the terminal.
+
+### For Linux / macOS (using `nohup`)
+
+The `nohup` command (no hang-up) ensures the process keeps running, and the `&` at the end sends it to the background. All output will be saved to a log file.
+
+1.  **Navigate** to your `Orbion-Node` directory.
+
+2.  **Run** the following command (remember to replace the wallet address placeholder):
+
+    ```bash
+    nohup ./Node/geth --datadir ./data --networkid 109901 --bootnodes "enode://8dc9f4362a8fe37ce936674f3424fadb628b5a5a538f53e5e6c901cd5af2fd538b80c68b259fba221f13ad2b84c5300624aeace1cb40bc88273a00c0c54726a5@bootnode.orbionchain.com:30305" --syncmode "full" --http --http.addr "0.0.0.0" --http.port "8545" --http.corsdomain "*" --mine --miner.etherbase <YOUR_WALLET_ADDRESS> --unlock <YOUR_WALLET_ADDRESS> --password "password.txt" --allow-insecure-unlock > orbion-node.log 2>&1 &
+    ```
+
+<!-- end list -->
+
+  * Your node is now running in the background.
+  * You can view the logs in real-time by running `tail -f orbion-node.log`.
+  * To stop the node, you'll need to find its process ID (`ps aux | grep geth`) and then use the `kill` command.
+
+### For Windows (using PowerShell `Start-Process`)
+
+We can use the `Start-Process` cmdlet to run the node in a new, hidden window.
+
+1.  **Open PowerShell** in your `Orbion-Node` directory.
+
+2.  **Create a script file.** Make a new file named `start-node.ps1`.
+
+3.  **Copy and paste** the following command into `start-node.ps1` (remember to replace the wallet address placeholder):
+
+    ```powershell
+    Start-Process -FilePath ".\Node\geth.exe" -ArgumentList "--datadir ./data --networkid 109901 --bootnodes 'enode://8dc9f4362a8fe37ce936674f3424fadb628b5a5a538f53e5e6c901cd5af2fd538b80c68b259fba221f13ad2b84c5300624aeace1cb40bc88273a00c0c54726a5@bootnode.orbionchain.com:30305' --syncmode 'full' --http --http.addr '0.0.0.0' --http.port '8545' --http.corsdomain '*' --mine --miner.etherbase <YOUR_WALLET_ADDRESS> --unlock <YOUR_WALLET_ADDRESS> --password 'password.txt' --allow-insecure-unlock" -NoNewWindow
+    ```
+
+4.  **Save the file.**
+
+5.  **Run the script** from your PowerShell terminal:
+
+    ```powershell
+    .\start-node.ps1
+    ```
+
+<!-- end list -->
+
+  * Your node is now running in the background.
+  * To stop it, open Task Manager, find the `geth.exe` process, and end it.
 
 -----
 
