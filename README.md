@@ -133,7 +133,7 @@ You should see a message like `Successfully wrote genesis state`.
 
 **This is a critical step.** Before your node can successfully create blocks, your wallet address must be approved by a network administrator.
 
-1.  **Join the official Telegram group:** [**CLICK HERE TO JOIN**](https://www.google.com/search?q=https://https://t.me/OrbionNetwork) \<-- *Ganti dengan link grup Telegram Anda*
+1.  **Join the official Telegram group:** [**CLICK HERE TO JOIN**](https://www.google.com/search?q=https://t.me/OrbionNetwork) \<-- *Ganti dengan link grup Telegram Anda*
 2.  **Request Approval:** Send a message to the group or an admin. State that you would like to be a validator.
 3.  **Provide Your Address:** When asked, provide the public wallet address you created in **Step 3**.
 
