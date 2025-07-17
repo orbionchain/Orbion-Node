@@ -1,4 +1,4 @@
-# Orbion Node Validator: A Complete Guide for Beginners 
+# Orbion Node Validator: A Complete Guide for Beginners 🚀
 
 Welcome\! This guide is designed to walk you through the process of setting up an **Orbion Validator Node** from scratch. We'll explain every step, what each command does, and how to ensure your node is running correctly.
 
@@ -98,23 +98,35 @@ Wait for confirmation from the admin that your address has been added to the val
 
 ### Step 5: Start Your Node and Connect\! 🌐
 
-Once you are approved, you can start your node. This command will connect you to the network and begin the validation process.
+Once you are approved, you can start your node. To allow the node to automatically sign blocks, you first need to provide its password securely.
+
+#### 5a. Create a Password File
+
+To avoid typing your password every time, you'll save it in a file.
+
+1.  In your `Orbion-Node` folder, create a new text file named `password.txt`.
+2.  Inside this file, type **only your wallet password** and nothing else.
+3.  Save and close the file.
+
+#### 5b. Run the Node with Unlocked Account
+
+Now, run the final command. We've added two new flags: `--unlock` to specify which account to use for validating, and `--password` to point to your new password file.
 
 **You must replace `<YOUR_WALLET_ADDRESS>` with the address you created in Step 2.**
 
   * **Final Command (Windows - PowerShell):**
 
     ```powershell
-    .\Node\geth.exe --datadir ./data --networkid 109901 --bootnodes "enode://8dc9f4362a8fe37ce936674f3424fadb628b5a5a538f53e5e6c901cd5af2fd538b80c68b259fba221f13ad2b84c5300624aeace1cb40bc88273a00c0c54726a5@bootnode.orbionchain.com:30305" --syncmode "full" --http --http.addr "0.0.0.0" --http.port "8545" --http.corsdomain "*" --mine --miner.etherbase <YOUR_WALLET_ADDRESS>
+    .\Node\geth.exe --datadir ./data --networkid 109901 --bootnodes "enode://8dc9f4362a8fe37ce936674f3424fadb628b5a5a538f53e5e6c901cd5af2fd538b80c68b259fba221f13ad2b84c5300624aeace1cb40bc88273a00c0c54726a5@bootnode.orbionchain.com:30305" --syncmode "full" --http --http.addr "0.0.0.0" --http.port "8545" --http.corsdomain "*" --mine --miner.etherbase <YOUR_WALLET_ADDRESS> --unlock <YOUR_WALLET_ADDRESS> --password "password.txt"
     ```
 
   * **Final Command (Linux / macOS - Bash):**
 
     ```bash
-    ./Node/geth --datadir ./data --networkid 109901 --bootnodes "enode://8dc9f4362a8fe37ce936674f3424fadb628b5a5a538f53e5e6c901cd5af2fd538b80c68b259fba221f13ad2b84c5300624aeace1cb40bc88273a00c0c54726a5@bootnode.orbionchain.com:30305" --syncmode "full" --http --http.addr "0.0.0.0" --http.port "8545" --http.corsdomain "*" --mine --miner.etherbase <YOUR_WALLET_ADDRESS>
+    ./Node/geth --datadir ./data --networkid 109901 --bootnodes "enode://8dc9f4362a8fe37ce936674f3424fadb628b5a5a538f53e5e6c901cd5af2fd538b80c68b259fba221f13ad2b84c5300624aeace1cb40bc88273a00c0c54726a5@bootnode.orbionchain.com:30305" --syncmode "full" --http --http.addr "0.0.0.0" --http.port "8545" --http.corsdomain "*" --mine --miner.etherbase <YOUR_WALLET_ADDRESS> --unlock <YOUR_WALLET_ADDRESS> --password "password.txt"
     ```
 
-Once you run this command, your node will start\! You will see log messages as it looks for peers and syncs the blockchain. If you are approved, you will eventually see messages about successfully sealing new blocks.
+Now, your node will start, automatically unlock your account, and begin sealing new blocks successfully.
 
 -----
 
@@ -137,7 +149,7 @@ This opens an interactive console. Here are some useful commands:
 ## ⚠️ Important Security Notice
 
   * **Firewall:** Your computer's firewall might block the node from connecting to others. You may need to allow incoming/outgoing connections for port `30303` (the default P2P port).
-  * **Keys and Passwords:** Never share the files in your `data/keystore` directory or your password. They control your funds.
+  * **Keys and Passwords:** Never share the files in your `data/keystore` directory or your `password.txt` file. They control your funds.
 
 -----
 
