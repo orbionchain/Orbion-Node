@@ -1,4 +1,4 @@
-# Orbion Validator Node — Complete Setup Guide 🚀
+# Orbion Validator Node Guide 🚀
 
 Welcome!  
 This guide will walk you through every step required to set up and run a validator node on the Orbion Testnet. No prior blockchain experience required. All instructions are clearly separated for Linux/macOS and Windows users. Let’s get started!
@@ -204,13 +204,4 @@ This software is released under the GNU General Public License v3.0.
 See the `COPYING` file in this repository for full license text.
 
 ---
-
-**Happy validating! 🚀**
-
-```
-
----
-
-**Now you and everyone else are safe to use this README.**  
-If you need even more customization or extra advanced tips, let me know!
-```
+Happy validating!
