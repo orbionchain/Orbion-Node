@@ -1,229 +1,208 @@
-# Orbion Node Validator: A Complete Guide for Beginners 🚀
+````markdown
+# Orbion Validator Node — Complete Setup Guide 🚀
 
-Welcome\! This guide is designed to walk you through the process of setting up an **Orbion Validator Node** from scratch. We'll explain every step, what each command does, and how to ensure your node is running correctly.
+Welcome!  
+This guide will walk you through every step required to set up and run a validator node on the Orbion Testnet. No prior blockchain experience required. All instructions are clearly separated for Linux/macOS and Windows users. Let’s get started!
 
-## 🧐 About This Project
+---
 
-This repository contains the necessary tools and information to run a validator node on the **Orbion testnet**. As a validator, you play a crucial role in securing the network by verifying transactions and creating new blocks. In return for your service, you are rewarded with coins.
+## 1. System Requirements
 
-This guide assumes you are starting with little to no experience in running a blockchain node.
+**Hardware Recommendations**
+- **CPU:** 4+ cores (modern Intel/AMD or ARM)
+- **RAM:** 8 GB or more
+- **Disk:** SSD, at least 100 GB free space
+- **Internet:** Reliable broadband, minimum 10 Mbps up/down
 
------
+**Software Requirements**
+- **Git** ([Download here](https://git-scm.com/downloads))
+- **Terminal:**  
+  - Linux/macOS: Terminal or Bash shell  
+  - Windows: PowerShell (recommended) or CMD
 
-## 🛠️ System and Software Requirements
+---
 
-Before we begin, ensure your system meets the following requirements.
+## 2. Download the Orbion Node Repository
 
-### Hardware Specifications (Recommended)
-
-To run a stable validator node, we recommend the following hardware specifications:
-
-  * **CPU:** Modern processor with 4 or more cores.
-  * **RAM:** 8 GB or more.
-  * **Storage:** A Solid State Drive (SSD) with at least 100 GB of free space is highly recommended for better performance.
-  * **Network:** A stable, high-speed internet connection (at least 10 Mbps).
-
-### Software Prerequisites
-
-1.  **A Command-Line Interface (CLI):**
-      * **Windows:** **PowerShell** or **CMD**.
-      * **Mac/Linux:** **Terminal** or **Bash**.
-2.  **Git:** A tool for downloading code from repositories like GitHub.
-      * *You can download it from [git-scm.com](https://git-scm.com/downloads).*
-
------
-
-## 📂 Understanding The Project Files
-
-Inside the repository, you'll find these important items:
-
-  * `Node/` (folder): Contains the core programs like `geth.exe`, the engine of your node.
-  * `genesis.json` (file): This is the "founding document" or the "Big Bang" of the blockchain. It defines the network's core rules and initial state.
-  * `COPYING` (file): The software license.
-
------
-
-## 🏁 Step-by-Step Setup Guide
-
-Follow these steps in order.
-
-### Step 1: Get the Project Files
-
-First, download all the necessary files from the repository onto your computer using Git.
-
-Open your terminal and run this command:
+Open your terminal (or PowerShell) and run:
 
 ```bash
-# This command downloads the project into a new folder named "Orbion-Node"
 git clone https://github.com/orbionchain/Orbion-Node.git
-
-# Now, navigate into that new folder
 cd Orbion-Node
+````
+
+---
+
+## 3. Create a Validator Wallet
+
+This wallet will receive your rewards.
+**Write down your password and new wallet address. You will need them later!**
+
+### Linux/macOS
+
+```bash
+./Node/geth --datadir ./data account new
 ```
 
-You are now in the project's main directory. All other commands should be run from here.
+### Windows (PowerShell)
 
-### Step 2: Create Your Validator Wallet 🔑
+```powershell
+.\Node\geth.exe --datadir .\data account new
+```
 
-You need a wallet address (account) to receive your validation rewards. Let's create one.
+* Follow the prompts to enter and confirm your password.
+* After creation, your new address will look like `0x1234...ABCD`.
+* **Copy and save both the password and the address.**
 
-Run the following command. It will ask you for a password. **Choose a strong password and save it somewhere safe\! If you lose it, you lose access to your wallet forever.**
+---
 
-  * **For Windows (PowerShell):**
-    ```powershell
-    .\Node\geth.exe --datadir ./data account new
-    ```
-  * **For Linux / macOS (Bash):**
-    ```bash
-    ./Node/geth --datadir ./data account new
-    ```
+## 4. Initialize the Blockchain Database
 
-After you enter and confirm your password, the command will output your new public address. It looks like this: `0x...`. **Copy this address and save it.** You will need it for the next steps.
+This step configures your local node to follow the Orbion testnet rules.
+**Only run this step once per setup.**
 
-### Step 3: Initialize the Blockchain
+### Linux/macOS
 
-Now we need to prepare the node's database using the `genesis.json` file. This command reads the genesis file and sets up your data directory according to the network's rules.
+```bash
+./Node/geth --datadir ./data init genesis.json
+```
 
-This `init` command only needs to be run **once**.
+### Windows (PowerShell)
 
-  * **For Windows (PowerShell):**
-    ```powershell
-    .\Node\geth.exe --datadir ./data init .\genesis.json
-    ```
-  * **For Linux / macOS (Bash):**
-    ```bash
-    ./Node/geth --datadir ./data init genesis.json
-    ```
+```powershell
+.\Node\geth.exe --datadir .\data init .\genesis.json
+```
 
-You should see a message like `Successfully wrote genesis state`.
+You should see:
+`Successfully wrote genesis state`
 
-### Step 4: Get Your Validator Approved ✅
+---
 
-**This is a critical step.** Before your node can successfully create blocks, your wallet address must be approved by a network administrator.
+## 5. Get Validator Approval
 
-1.  **Join the official Telegram group:** [**CLICK HERE TO JOIN**](https://t.me/OrbionNetwork)
-2.  **Request Approval:** Send a message to the group or an admin. State that you would like to be a validator.
-3.  **Provide Your Address:** When asked, provide the public wallet address you created in **Step 2**.
+Your wallet **must** be approved before your node can validate blocks.
 
-Wait for confirmation from the admin that your address has been added to the validator set. **Do not proceed to the next step until you are approved.**
+1. **Join the Orbion Testnet Telegram:**
+   [https://t.me/OrbionNetwork](https://t.me/OrbionNetwork)
+2. **Request validator approval:**
+   Send your wallet address (from Step 3) and request to be added as a validator.
+3. **Wait for confirmation** from an admin.
 
-### Step 5: Start Your Node and Connect\! 🌐
+---
 
-Once you are approved, you can start your node. To allow the node to automatically sign blocks, you first need to provide its password securely.
+## 6. Save Your Wallet Password
 
-#### 5a. Create a Password File
+You’ll need to unlock your account for mining.
 
-To avoid typing your password every time, you'll save it in a file.
+* In the `Orbion-Node` directory, create a text file named:
 
-1.  In your `Orbion-Node` folder, create a new text file named `password.txt`.
-2.  Inside this file, type **only your wallet password** and nothing else.
-3.  Save and close the file.
+  * `password.txt`
+* The file should contain **only your password** (no quotes, no spaces, no line breaks).
 
-#### 5b. Run the Node with Unlocked Account
+Example (password file content):
 
-Now, run the final command. This is the complete command with all necessary flags for a secure and stable validator node.
+```
+yourSuperSecretPassword
+```
 
-**You must replace `<YOUR_WALLET_ADDRESS>` with the address you created in Step 2.**
+---
 
-  * **Final Command (Windows - PowerShell):**
+## 7. Start Your Node (Single Command)
 
-    ```powershell
-    .\Node\geth.exe --datadir ./data --networkid 109901 --bootnodes "enode://8dc9f4362a8fe37ce936674f3424fadb628b5a5a538f53e5e6c901cd5af2fd538b80c68b259fba221f13ad2b84c5300624aeace1cb40bc88273a00c0c54726a5@bootnode.orbionchain.com:30305" --port 30303 --http --http.addr "0.0.0.0" --http.port 8545 --http.api "eth,net,web3,personal,miner" --http.corsdomain "virtual-testnet.orbionchain.com" --http.vhosts "virtual-testnet.orbionchain.com" --allow-insecure-unlock --unlock <YOUR_WALLET_ADDRESS> --password "password.txt" --mine --miner.etherbase <YOUR_WALLET_ADDRESS> --verbosity 3
-    ```
+**You must replace `<YOUR_WALLET_ADDRESS>` with your real address from Step 3.**
 
-  * **Final Command (Linux / macOS - Bash):**
+### Linux/macOS
 
-    ```bash
-    ./Node/geth --datadir ./data --networkid 109901 --bootnodes "enode://8dc9f4362a8fe37ce936674f3424fadb628b5a5a538f53e5e6c901cd5af2fd538b80c68b259fba221f13ad2b84c5300624aeace1cb40bc88273a00c0c54726a5@bootnode.orbionchain.com:30305" --port 30303 --http --http.addr "0.0.0.0" --http.port 8545 --http.api "eth,net,web3,personal,miner" --http.corsdomain "virtual-testnet.orbionchain.com" --http.vhosts "virtual-testnet.orbionchain.com" --allow-insecure-unlock --unlock <YOUR_WALLET_ADDRESS> --password "password.txt" --mine --miner.etherbase <YOUR_WALLET_ADDRESS> --verbosity 3
-    ```
+```bash
+./Node/geth --datadir ./data --networkid 109901 --bootnodes "enode://8dc9f4362a8fe37ce936674f3424fadb628b5a5a538f53e5e6c901cd5af2fd538b80c68b259fba221f13ad2b84c5300624aeace1cb40bc88273a00c0c54726a5@bootnode.orbionchain.com:30305" --port 30303 --http --http.addr "0.0.0.0" --http.port 8545 --http.api "eth,net,web3,personal,miner,txpool" --http.corsdomain "virtual-testnet.orbionchain.com" --http.vhosts "virtual-testnet.orbionchain.com" --allow-insecure-unlock --unlock "<YOUR_WALLET_ADDRESS>" --password ./password.txt --miner.etherbase <YOUR_WALLET_ADDRESS> --mine --verbosity 3 console
+```
 
-#### Configuration Breakdown
+### Windows (PowerShell)
 
-| Flag | Description |
-| :--- | :--- |
-| `--port 30303` | Sets the network port for peer-to-peer communication. |
-| `--http.api "..."` | Defines which modules are accessible over HTTP (e.g., `eth`, `net`). |
-| `--http.corsdomain "..."` | A security measure that only allows specified domains to make requests. |
-| `--http.vhosts "..."` | Only allows connections that specify this host. Use your domain or IP address. |
-| `--verbosity 3` | Sets the log detail level. 3 is standard (Info), 4 is for debugging. |
-| `--allow-insecure-unlock`| Required to unlock an account when the HTTP server is running. |
+```powershell
+.\Node\geth.exe --datadir .\data --networkid 109901 --bootnodes "enode://8dc9f4362a8fe37ce936674f3424fadb628b5a5a538f53e5e6c901cd5af2fd538b80c68b259fba221f13ad2b84c5300624aeace1cb40bc88273a00c0c54726a5@bootnode.orbionchain.com:30305" --port 30303 --http --http.addr "0.0.0.0" --http.port 8545 --http.api "eth,net,web3,personal,miner,txpool" --http.corsdomain "virtual-testnet.orbionchain.com" --http.vhosts "virtual-testnet.orbionchain.com" --allow-insecure-unlock --unlock "<YOUR_WALLET_ADDRESS>" --password "password.txt" --miner.etherbase <YOUR_WALLET_ADDRESS> --mine --verbosity 3 console
+```
 
------
+**Tip:**
+You can close the node console with `CTRL+C` (the node will stop).
 
-## 🚀 Running Your Node 24/7 (Advanced)
+---
 
-To be a reliable validator, your node must run continuously. If you close the terminal window, the node will stop. Here’s how to run it as a background process.
+## 8. Run Your Node 24/7 (Background/Service Mode)
 
-### For Linux / macOS (using `nohup`)
+To keep your node running even when you close your terminal:
 
-The `nohup` command (no hang-up) ensures the process keeps running, and `&` sends it to the background.
+### Linux/macOS
 
-1.  **Navigate** to your `Orbion-Node` directory.
+```bash
+nohup ./Node/geth --datadir ./data --networkid 109901 --bootnodes "enode://8dc9f4362a8fe37ce936674f3424fadb628b5a5a538f53e5e6c901cd5af2fd538b80c68b259fba221f13ad2b84c5300624aeace1cb40bc88273a00c0c54726a5@bootnode.orbionchain.com:30305" --port 30303 --http --http.addr "0.0.0.0" --http.port 8545 --http.api "eth,net,web3,personal,miner,txpool" --http.corsdomain "virtual-testnet.orbionchain.com" --http.vhosts "virtual-testnet.orbionchain.com" --allow-insecure-unlock --unlock "<YOUR_WALLET_ADDRESS>" --password ./password.txt --miner.etherbase <YOUR_WALLET_ADDRESS> --mine --verbosity 3 > orbion-node.log 2>&1 &
+```
 
-2.  **Run** the following command (replace the placeholder):
+* To see logs: `tail -f orbion-node.log`
+* To stop: `ps aux | grep geth` then `kill <PID>`
 
-    ```bash
-    nohup ./Node/geth --datadir ./data --networkid 109901 --bootnodes "enode://8dc9f4362a8fe37ce936674f3424fadb628b5a5a538f53e5e6c901cd5af2fd538b80c68b259fba221f13ad2b84c5300624aeace1cb40bc88273a00c0c54726a5@bootnode.orbionchain.com:30305" --port 30303 --http --http.addr "0.0.0.0" --http.port 8545 --http.api "eth,net,web3,personal,miner" --http.corsdomain "virtual-testnet.orbionchain.com" --http.vhosts "virtual-testnet.orbionchain.com" --allow-insecure-unlock --unlock <YOUR_WALLET_ADDRESS> --password "password.txt" --mine --miner.etherbase <YOUR_WALLET_ADDRESS> --verbosity 3 > orbion-node.log 2>&1 &
-    ```
+### Windows (PowerShell)
 
-<!-- end list -->
+1. Open Notepad, paste the following (edit `<YOUR_WALLET_ADDRESS>`):
 
-  * Your node is now running in the background.
-  * You can view the logs in real-time by running `tail -f orbion-node.log`.
-  * To stop the node, find its process ID (`ps aux | grep geth`) and use the `kill` command.
+   ```powershell
+   Start-Process -FilePath ".\Node\geth.exe" -ArgumentList "--datadir .\data --networkid 109901 --bootnodes 'enode://8dc9f4362a8fe37ce936674f3424fadb628b5a5a538f53e5e6c901cd5af2fd538b80c68b259fba221f13ad2b84c5300624aeace1cb40bc88273a00c0c54726a5@bootnode.orbionchain.com:30305' --port 30303 --http --http.addr '0.0.0.0' --http.port 8545 --http.api 'eth,net,web3,personal,miner,txpool' --http.corsdomain 'virtual-testnet.orbionchain.com' --http.vhosts 'virtual-testnet.orbionchain.com' --allow-insecure-unlock --unlock '<YOUR_WALLET_ADDRESS>' --password 'password.txt' --miner.etherbase <YOUR_WALLET_ADDRESS> --mine --verbosity 3" -NoNewWindow
+   ```
+2. Save as `start-node.ps1` in the `Orbion-Node` directory.
+3. Start from PowerShell:
 
-### For Windows (using PowerShell `Start-Process`)
+   ```powershell
+   .\start-node.ps1
+   ```
+4. To stop: open Task Manager, find `geth.exe`, and End Task.
 
-We can use `Start-Process` to run the node in a new, hidden window.
+---
 
-1.  **Open PowerShell** in your `Orbion-Node` directory.
+## 9. Checking Your Node Status
 
-2.  **Create a script file.** Make a new file named `start-node.ps1`.
+You can open a **second terminal window** to interact with your running node.
 
-3.  **Copy and paste** the following command into `start-node.ps1` (replace the placeholder):
+### Linux/macOS
 
-    ```powershell
-    Start-Process -FilePath ".\Node\geth.exe" -ArgumentList "--datadir ./data --networkid 109901 --bootnodes 'enode://8dc9f4362a8fe37ce936674f3424fadb628b5a5a538f53e5e6c901cd5af2fd538b80c68b259fba221f13ad2b84c5300624aeace1cb40bc88273a00c0c54726a5@bootnode.orbionchain.com:30305' --port 30303 --http --http.addr '0.0.0.0' --http.port 8545 --http.api 'eth,net,web3,personal,miner' --http.corsdomain 'virtual-testnet.orbionchain.com' --http.vhosts 'virtual-testnet.orbionchain.com' --allow-insecure-unlock --unlock <YOUR_WALLET_ADDRESS> --password 'password.txt' --mine --miner.etherbase <YOUR_WALLET_ADDRESS> --verbosity 3" -NoNewWindow
-    ```
+```bash
+./Node/geth attach http://127.0.0.1:8545
+```
 
-4.  **Save the file.**
+### Windows
 
-5.  **Run the script** from your PowerShell terminal:
+```powershell
+.\Node\geth.exe attach http://127.0.0.1:8545
+```
 
-    ```powershell
-    .\start-node.ps1
-    ```
+Inside the Geth console, useful commands:
 
-<!-- end list -->
+* `eth.syncing`
+  Returns `false` when fully synced.
+* `net.peerCount`
+  Shows number of peers (should be > 0).
+* `eth.blockNumber`
+  Current block height.
+* `miner.getEtherbase()`
+  Shows the mining reward address.
 
-  * Your node is now running in the background.
-  * To stop it, open Task Manager, find the `geth.exe` process, and end it.
+---
 
------
+## 10. Security Recommendations
 
-## ✅ Checking Your Node's Status
+* **Never share your `data/keystore` or `password.txt` file.** These control your funds!
+* Make sure firewall allows TCP port `30303` for peer connectivity.
+* Regularly back up your wallet address, password, and `genesis.json`.
 
-To interact with your running node, open a **new, separate terminal window**. Then run the "attach" command:
+---
 
-  * **Windows:** `.\Node\geth.exe attach http://127.0.0.1:8545`
-  * **Linux/Mac:** `./Node/geth attach http://127.0.0.1:8545`
+## 11. Need Help?
 
-This opens an interactive console. Here are some useful commands:
+If you have issues or questions, join the Orbion Testnet [Telegram group](https://t.me/OrbionNetwork) for help and community support.
 
-  * `eth.syncing`: If it returns `false`, your node is fully synced.
-  * `net.peerCount`: Shows how many other nodes you are connected to. Should be greater than 0.
-  * `eth.blockNumber`: Shows the current latest block number your node has.
-  * `miner.getEtherbase()`: Should show the wallet address you are mining to.
+---
 
------
+## 12. License
 
-## ⚠️ Important Security Notice
+This software is released under the GNU General Public License v3.0.
+See the `COPYING` file in this repository for full license text.
 
-  * **Firewall:** Your computer's firewall might block the node from connecting to others. You may need to allow incoming/outgoing connections for port `30303`.
-  * **Keys and Passwords:** Never share the files in your `data/keystore` directory or your `password.txt` file. They control your funds.
-
------
-
-## 📜 License
-
-This software is distributed under the GNU General Public License v3.0. You can read the full license in the `COPYING` file.
