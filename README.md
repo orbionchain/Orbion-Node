@@ -1,4 +1,3 @@
-
 # Orbion Validator Node — Complete Setup Guide 🚀
 
 Welcome!  
@@ -19,7 +18,6 @@ This guide will walk you through every step required to set up and run a validat
 - **Terminal:**  
   - Linux/macOS: Terminal or Bash shell  
   - Windows: PowerShell (recommended) or CMD
-
 
 ## 2. Download the Orbion Node Repository
 
@@ -113,13 +111,13 @@ yourSuperSecretPassword
 ### Linux/macOS
 
 ```bash
-./Node/geth --datadir ./data --networkid 109901 --bootnodes "enode://8dc9f4362a8fe37ce936674f3424fadb628b5a5a538f53e5e6c901cd5af2fd538b80c68b259fba221f13ad2b84c5300624aeace1cb40bc88273a00c0c54726a5@bootnode.orbionchain.com:30305" --port 30303 --http --http.addr "0.0.0.0" --http.port 8545 --http.api "eth,net,web3,personal,miner,txpool" --http.corsdomain "virtual-testnet.orbionchain.com" --http.vhosts "virtual-testnet.orbionchain.com" --allow-insecure-unlock --unlock "<YOUR_WALLET_ADDRESS>" --password ./password.txt --miner.etherbase <YOUR_WALLET_ADDRESS> --mine --verbosity 3 console
+./Node/geth --datadir ./data --networkid 109901 --bootnodes "enode://8dc9f4362a8fe37ce936674f3424fadb628b5a5a538f53e5e6c901cd5af2fd538b80c68b259fba221f13ad2b84c5300624aeace1cb40bc88273a00c0c54726a5@bootnode.orbionchain.com:30305" --port 30303 --http --http.addr "0.0.0.0" --http.port 8545 --http.api "eth,net,web3,personal,miner,txpool" --allow-insecure-unlock --unlock "<YOUR_WALLET_ADDRESS>" --password ./password.txt --miner.etherbase <YOUR_WALLET_ADDRESS> --mine --verbosity 3 console
 ```
 
 ### Windows (PowerShell)
 
 ```powershell
-.\Node\geth.exe --datadir .\data --networkid 109901 --bootnodes "enode://8dc9f4362a8fe37ce936674f3424fadb628b5a5a538f53e5e6c901cd5af2fd538b80c68b259fba221f13ad2b84c5300624aeace1cb40bc88273a00c0c54726a5@bootnode.orbionchain.com:30305" --port 30303 --http --http.addr "0.0.0.0" --http.port 8545 --http.api "eth,net,web3,personal,miner,txpool" --http.corsdomain "virtual-testnet.orbionchain.com" --http.vhosts "virtual-testnet.orbionchain.com" --allow-insecure-unlock --unlock "<YOUR_WALLET_ADDRESS>" --password "password.txt" --miner.etherbase <YOUR_WALLET_ADDRESS> --mine --verbosity 3 console
+.\Node\geth.exe --datadir .\data --networkid 109901 --bootnodes "enode://8dc9f4362a8fe37ce936674f3424fadb628b5a5a538f53e5e6c901cd5af2fd538b80c68b259fba221f13ad2b84c5300624aeace1cb40bc88273a00c0c54726a5@bootnode.orbionchain.com:30305" --port 30303 --http --http.addr "0.0.0.0" --http.port 8545 --http.api "eth,net,web3,personal,miner,txpool" --allow-insecure-unlock --unlock "<YOUR_WALLET_ADDRESS>" --password "password.txt" --miner.etherbase <YOUR_WALLET_ADDRESS> --mine --verbosity 3 console
 ```
 
 **Tip:**
@@ -134,7 +132,7 @@ To keep your node running even when you close your terminal:
 ### Linux/macOS
 
 ```bash
-nohup ./Node/geth --datadir ./data --networkid 109901 --bootnodes "enode://8dc9f4362a8fe37ce936674f3424fadb628b5a5a538f53e5e6c901cd5af2fd538b80c68b259fba221f13ad2b84c5300624aeace1cb40bc88273a00c0c54726a5@bootnode.orbionchain.com:30305" --port 30303 --http --http.addr "0.0.0.0" --http.port 8545 --http.api "eth,net,web3,personal,miner,txpool" --http.corsdomain "virtual-testnet.orbionchain.com" --http.vhosts "virtual-testnet.orbionchain.com" --allow-insecure-unlock --unlock "<YOUR_WALLET_ADDRESS>" --password ./password.txt --miner.etherbase <YOUR_WALLET_ADDRESS> --mine --verbosity 3 > orbion-node.log 2>&1 &
+nohup ./Node/geth --datadir ./data --networkid 109901 --bootnodes "enode://8dc9f4362a8fe37ce936674f3424fadb628b5a5a538f53e5e6c901cd5af2fd538b80c68b259fba221f13ad2b84c5300624aeace1cb40bc88273a00c0c54726a5@bootnode.orbionchain.com:30305" --port 30303 --http --http.addr "0.0.0.0" --http.port 8545 --http.api "eth,net,web3,personal,miner,txpool" --allow-insecure-unlock --unlock "<YOUR_WALLET_ADDRESS>" --password ./password.txt --miner.etherbase <YOUR_WALLET_ADDRESS> --mine --verbosity 3 > orbion-node.log 2>&1 &
 ```
 
 * To see logs: `tail -f orbion-node.log`
@@ -145,7 +143,7 @@ nohup ./Node/geth --datadir ./data --networkid 109901 --bootnodes "enode://8dc9f
 1. Open Notepad, paste the following (edit `<YOUR_WALLET_ADDRESS>`):
 
    ```powershell
-   Start-Process -FilePath ".\Node\geth.exe" -ArgumentList "--datadir .\data --networkid 109901 --bootnodes 'enode://8dc9f4362a8fe37ce936674f3424fadb628b5a5a538f53e5e6c901cd5af2fd538b80c68b259fba221f13ad2b84c5300624aeace1cb40bc88273a00c0c54726a5@bootnode.orbionchain.com:30305' --port 30303 --http --http.addr '0.0.0.0' --http.port 8545 --http.api 'eth,net,web3,personal,miner,txpool' --http.corsdomain 'virtual-testnet.orbionchain.com' --http.vhosts 'virtual-testnet.orbionchain.com' --allow-insecure-unlock --unlock '<YOUR_WALLET_ADDRESS>' --password 'password.txt' --miner.etherbase <YOUR_WALLET_ADDRESS> --mine --verbosity 3" -NoNewWindow
+   Start-Process -FilePath ".\Node\geth.exe" -ArgumentList "--datadir .\data --networkid 109901 --bootnodes 'enode://8dc9f4362a8fe37ce936674f3424fadb628b5a5a538f53e5e6c901cd5af2fd538b80c68b259fba221f13ad2b84c5300624aeace1cb40bc88273a00c0c54726a5@bootnode.orbionchain.com:30305' --port 30303 --http --http.addr '0.0.0.0' --http.port 8545 --http.api 'eth,net,web3,personal,miner,txpool' --allow-insecure-unlock --unlock '<YOUR_WALLET_ADDRESS>' --password 'password.txt' --miner.etherbase <YOUR_WALLET_ADDRESS> --mine --verbosity 3" -NoNewWindow
    ```
 2. Save as `start-node.ps1` in the `Orbion-Node` directory.
 3. Start from PowerShell:
@@ -205,3 +203,14 @@ If you have issues or questions, join the Orbion Testnet [Telegram group](https:
 This software is released under the GNU General Public License v3.0.
 See the `COPYING` file in this repository for full license text.
 
+---
+
+**Happy validating! 🚀**
+
+```
+
+---
+
+**Now you and everyone else are safe to use this README.**  
+If you need even more customization or extra advanced tips, let me know!
+```
