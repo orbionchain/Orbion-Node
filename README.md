@@ -1,4 +1,4 @@
-````markdown
+
 # Orbion Validator Node — Complete Setup Guide 🚀
 
 Welcome!  
@@ -20,7 +20,6 @@ This guide will walk you through every step required to set up and run a validat
   - Linux/macOS: Terminal or Bash shell  
   - Windows: PowerShell (recommended) or CMD
 
----
 
 ## 2. Download the Orbion Node Repository
 
